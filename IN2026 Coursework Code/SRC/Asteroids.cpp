@@ -58,19 +58,14 @@ void Asteroids::Start()
 	Animation *asteroid1_anim = AnimationManager::GetInstance().CreateAnimationFromFile("asteroid1", 128, 8192, 128, 128, "asteroid1_fs.png");
 	Animation *spaceship_anim = AnimationManager::GetInstance().CreateAnimationFromFile("spaceship", 128, 128, 128, 128, "spaceship_fs.png");
 
-	// Create a spaceship and add it to the world
-	mGameWorld->AddObject(CreateSpaceship());
-	// Create some asteroids and add them to the world
-	CreateAsteroids(10);
-
-	//Create the GUI
-	CreateGUI();
-
 	// Add a player (watcher) to the game world
 	mGameWorld->AddListener(&mPlayer);
 
 	// Add this class as a listener of the player
 	mPlayer.AddListener(thisPtr);
+
+	// Creates a start screen gui which displays option to start and exit the game
+	CreateStartScreenGUI();
 
 	// Start the game
 	GameSession::Start();
@@ -110,6 +105,20 @@ void Asteroids::OnSpecialKeyPressed(int key, int x, int y)
 	// If right arrow key is pressed start rotating clockwise
 	case GLUT_KEY_RIGHT: mSpaceship->Rotate(-90); break;
 	// Default case - do nothing
+	case GLUT_KEY_DOWN:
+		// Create a spaceship and add it to the world
+		mGameWorld->AddObject(CreateSpaceship());
+		// Create some asteroids and add them to the world
+		CreateAsteroids(10);
+		//removes start screen gui
+		RemoveStartScreenGUI();
+		//Create the GUI
+		CreateGUI();
+		break;
+
+	case GLUT_KEY_END:
+		Stop();
+		break;
 	default: break;
 	}
 }
@@ -244,6 +253,28 @@ void Asteroids::CreateGUI()
 		= static_pointer_cast<GUIComponent>(mGameOverLabel);
 	mGameDisplay->GetContainer()->AddComponent(game_over_component, GLVector2f(0.5f, 0.5f));
 
+}
+void Asteroids::CreateStartScreenGUI() {
+	// Create a new GUILabel and wrap it up in a shared_ptr
+	mStartGame = make_shared<GUILabel>("Press \"DOWN ARROW KEY\" To Start");
+	// Set the vertical alignment of the label to GUI_VALIGN_BOTTOM
+	mStartGame->SetVerticalAlignment(GUIComponent::GUI_VALIGN_BOTTOM);
+	// Add the GUILabel to the GUIComponent  
+	shared_ptr<GUIComponent> start_game_component = static_pointer_cast<GUIComponent>(mStartGame);
+	mGameDisplay->GetContainer()->AddComponent(start_game_component, GLVector2f(0.18f, 0.6f));
+
+	// Create a new GUILabel and wrap it up in a shared_ptr
+	mExitGame = make_shared<GUILabel>("Press \"End KEY\" To Exit");
+	// Set the vertical alignment of the label to GUI_VALIGN_BOTTOM
+	mExitGame->SetVerticalAlignment(GUIComponent::GUI_VALIGN_BOTTOM);
+	// Add the GUILabel to the GUIComponent  
+	shared_ptr<GUIComponent> exit_game_component = static_pointer_cast<GUIComponent>(mExitGame);
+	mGameDisplay->GetContainer()->AddComponent(exit_game_component, GLVector2f(0.25f, 0.2f));
+
+}
+void Asteroids::RemoveStartScreenGUI() {
+	mStartGame->SetVisible(false);
+	mExitGame->SetVisible(false);
 }
 
 void Asteroids::OnScoreChanged(int score)
