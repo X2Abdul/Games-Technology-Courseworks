@@ -106,14 +106,20 @@ void Asteroids::OnSpecialKeyPressed(int key, int x, int y)
 	case GLUT_KEY_RIGHT: mSpaceship->Rotate(-90); break;
 	// Default case - do nothing
 	case GLUT_KEY_DOWN:
-		// Create a spaceship and add it to the world
-		mGameWorld->AddObject(CreateSpaceship());
-		// Create some asteroids and add them to the world
-		CreateAsteroids(10);
-		//removes start screen gui
-		RemoveStartScreenGUI();
-		//Create the GUI
-		CreateGUI();
+		if (!gamestart) {
+			// Create a spaceship and add it to the world
+			mGameWorld->AddObject(CreateSpaceship());
+			// Create some asteroids and add them to the world
+			CreateAsteroids(10);
+			//removes start screen gui
+			RemoveStartScreenGUI();
+			//Create the GUI
+			CreateGUI();
+			//set the game start bool to true
+			gamestart = true;
+			break;
+		}
+
 		break;
 
 	case GLUT_KEY_END:
