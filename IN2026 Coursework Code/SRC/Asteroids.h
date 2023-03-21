@@ -34,6 +34,9 @@ public:
 
 	void OnScoreChanged(int score);
 
+
+	void WriteScore();
+
 	// Declaration of the IPlayerLister interface //////////////////////////////
 
 	void OnPlayerKilled(int lives_left);
@@ -47,6 +50,10 @@ public:
 	// Override the default implementation of ITimerListener ////////////////////
 	void OnTimer(int value);
 
+	void setAsteroidCount(int s) {
+		asteroidCount = s;
+	}
+
 private:
 	shared_ptr<Spaceship> mSpaceship;
 	shared_ptr<GUILabel> mScoreLabel;
@@ -54,11 +61,17 @@ private:
 	shared_ptr<GUILabel> mGameOverLabel;
 	shared_ptr<GUILabel> mStartGame;
 	shared_ptr<GUILabel> mExitGame;
+	shared_ptr<GUILabel> mPlayAgain;
+
+
+
 
 	uint mLevel;
 	uint mAsteroidCount;
 
-	bool gamestart = false;
+	int asteroidCount = 10;
+
+	bool spaceshipAlive = false;
 
 	void ResetSpaceship();
 	shared_ptr<GameObject> CreateSpaceship();
@@ -66,7 +79,11 @@ private:
 	void CreateStartScreenGUI();
 	void RemoveStartScreenGUI();
 	void CreateAsteroids(const uint num_asteroids);
+
+	
 	shared_ptr<GameObject> CreateExplosion();
+
+	void WriteScore();
 	
 	const static uint SHOW_GAME_OVER = 0;
 	const static uint START_NEXT_LEVEL = 1;

@@ -35,11 +35,17 @@ public:
 		// Send message to all listeners
 		for (ScoreListenerList::iterator lit = mListeners.begin(); lit != mListeners.end(); ++lit) {
 			(*lit)->OnScoreChanged(mScore);
+			
 		}
 	}
 
+	int getmScore() {
+		return mScore;
+	}
+	
 private:
 	int mScore;
+	
 
 	typedef std::list< shared_ptr<IScoreListener> > ScoreListenerList;
 

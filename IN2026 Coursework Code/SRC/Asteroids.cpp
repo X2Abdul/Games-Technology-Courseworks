@@ -11,7 +11,7 @@
 #include "BoundingSphere.h"
 #include "GUILabel.h"
 #include "Explosion.h"
-
+#include "ScoreKeeper.h"
 // PUBLIC INSTANCE CONSTRUCTORS ///////////////////////////////////////////////
 
 /** Constructor. Takes arguments from command line, just in case. */
@@ -32,6 +32,7 @@ Asteroids::~Asteroids(void)
 /** Start an asteroids game. */
 void Asteroids::Start()
 {
+	
 	// Create a shared pointer for the Asteroids game object - DO NOT REMOVE
 	shared_ptr<Asteroids> thisPtr = shared_ptr<Asteroids>(this);
 
@@ -76,6 +77,7 @@ void Asteroids::Stop()
 {
 	// Stop the game
 	GameSession::Stop();
+	
 }
 
 // PUBLIC INSTANCE METHODS IMPLEMENTING IKeyboardListener /////////////////////
@@ -87,6 +89,11 @@ void Asteroids::OnKeyPressed(uchar key, int x, int y)
 	case ' ':
 		mSpaceship->Shoot();
 		break;
+
+	case 'p':
+		mGameOverLabel->SetVisible(false);
+		mPlayAgain->SetVisible(false);
+		Start();
 	default:
 		break;
 	}
@@ -106,7 +113,8 @@ void Asteroids::OnSpecialKeyPressed(int key, int x, int y)
 	case GLUT_KEY_RIGHT: mSpaceship->Rotate(-90); break;
 	// Default case - do nothing
 	case GLUT_KEY_DOWN:
-		if (!gamestart) {
+		
+		if (!spaceshipAlive) {
 			// Create a spaceship and add it to the world
 			mGameWorld->AddObject(CreateSpaceship());
 			// Create some asteroids and add them to the world
@@ -116,7 +124,7 @@ void Asteroids::OnSpecialKeyPressed(int key, int x, int y)
 			//Create the GUI
 			CreateGUI();
 			//set the game start bool to true
-			gamestart = true;
+			spaceshipAlive = true;
 			break;
 		}
 
@@ -182,7 +190,13 @@ void Asteroids::OnTimer(int value)
 
 	if (value == SHOW_GAME_OVER)
 	{
+		WriteScore();
+		spaceshipAlive = false;
 		mGameOverLabel->SetVisible(true);
+		mPlayAgain->SetVisible(true);
+		mScoreLabel->SetVisible(false);
+		mLivesLabel->SetVisible(false);
+		
 	}
 
 }
@@ -239,7 +253,7 @@ void Asteroids::CreateGUI()
 	mGameDisplay->GetContainer()->AddComponent(score_component, GLVector2f(0.0f, 1.0f));
 
 	// Create a new GUILabel and wrap it up in a shared_ptr
-	mLivesLabel = make_shared<GUILabel>("Lives: 3");
+	mLivesLabel = make_shared<GUILabel>("Lives: 0");
 	// Set the vertical alignment of the label to GUI_VALIGN_BOTTOM
 	mLivesLabel->SetVerticalAlignment(GUIComponent::GUI_VALIGN_BOTTOM);
 	// Add the GUILabel to the GUIComponent  
@@ -258,6 +272,19 @@ void Asteroids::CreateGUI()
 	shared_ptr<GUIComponent> game_over_component
 		= static_pointer_cast<GUIComponent>(mGameOverLabel);
 	mGameDisplay->GetContainer()->AddComponent(game_over_component, GLVector2f(0.5f, 0.5f));
+
+	// Create a new GUILabel and wrap it up in a shared_ptr
+	mPlayAgain = shared_ptr<GUILabel>(new GUILabel("P -> Play Again"));
+	// Set the horizontal alignment of the label to GUI_HALIGN_CENTER
+	mPlayAgain->SetHorizontalAlignment(GUIComponent::GUI_HALIGN_CENTER);
+	// Set the vertical alignment of the label to GUI_VALIGN_MIDDLE
+	mPlayAgain->SetVerticalAlignment(GUIComponent::GUI_VALIGN_BOTTOM);
+	// Set the visibility of the label to false (hidden)
+	mPlayAgain->SetVisible(false);
+	// Add the GUILabel to the GUIContainer  
+	shared_ptr<GUIComponent> play_again_component
+		= static_pointer_cast<GUIComponent>(mPlayAgain);
+	mGameDisplay->GetContainer()->AddComponent(play_again_component, GLVector2f(0.5f, 0.3f));
 
 }
 void Asteroids::CreateStartScreenGUI() {
@@ -291,6 +318,14 @@ void Asteroids::OnScoreChanged(int score)
 	// Get the score message as a string
 	std::string score_msg = msg_stream.str();
 	mScoreLabel->SetText(score_msg);
+}
+
+//Writes the Current Score to the File to keep record of scores.
+void Asteroids::WriteScore()
+{
+	ofstream file("VC\Asteroids\Scores.txt", ios::out | ios::app);
+	file << mScoreKeeper.getmScore() << endl;
+	file.close();
 }
 
 void Asteroids::OnPlayerKilled(int lives_left)
@@ -329,6 +364,8 @@ shared_ptr<GameObject> Asteroids::CreateExplosion()
 	return explosion;
 }
 
+
+	
 
 
 
