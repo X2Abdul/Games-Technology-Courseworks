@@ -35,7 +35,7 @@ public:
 	void OnScoreChanged(int score);
 
 
-	void WriteScore();
+	
 
 	// Declaration of the IPlayerLister interface //////////////////////////////
 
@@ -63,6 +63,10 @@ private:
 	shared_ptr<GUILabel> mExitGame;
 	shared_ptr<GUILabel> mPlayAgain;
 
+	//High Score Table Labels
+	shared_ptr<GUILabel> mHighScoreTable;
+	shared_ptr<GUILabel> mPrintScore;
+
 
 
 
@@ -83,7 +87,11 @@ private:
 	
 	shared_ptr<GameObject> CreateExplosion();
 
+	//high score meathods
 	void WriteScore();
+	void ReadScore();
+	/*void CreateScoreGUI(const vector<int> &scores);
+	vector<int> topFiveScore(string filename);*/
 	
 	const static uint SHOW_GAME_OVER = 0;
 	const static uint START_NEXT_LEVEL = 1;

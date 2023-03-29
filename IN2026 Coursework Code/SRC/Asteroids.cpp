@@ -1,4 +1,4 @@
-#include "Asteroid.h"
+﻿#include "Asteroid.h"
 #include "Asteroids.h"
 #include "Animation.h"
 #include "AnimationManager.h"
@@ -12,6 +12,9 @@
 #include "GUILabel.h"
 #include "Explosion.h"
 #include "ScoreKeeper.h"
+#include <vector>
+#include <algorithm>
+#include <fstream>
 // PUBLIC INSTANCE CONSTRUCTORS ///////////////////////////////////////////////
 
 /** Constructor. Takes arguments from command line, just in case. */
@@ -196,7 +199,7 @@ void Asteroids::OnTimer(int value)
 		mPlayAgain->SetVisible(true);
 		mScoreLabel->SetVisible(false);
 		mLivesLabel->SetVisible(false);
-		
+		ReadScore();
 	}
 
 }
@@ -271,7 +274,7 @@ void Asteroids::CreateGUI()
 	// Add the GUILabel to the GUIContainer  
 	shared_ptr<GUIComponent> game_over_component
 		= static_pointer_cast<GUIComponent>(mGameOverLabel);
-	mGameDisplay->GetContainer()->AddComponent(game_over_component, GLVector2f(0.5f, 0.5f));
+	mGameDisplay->GetContainer()->AddComponent(game_over_component, GLVector2f(0.5f, 0.2f));
 
 	// Create a new GUILabel and wrap it up in a shared_ptr
 	mPlayAgain = shared_ptr<GUILabel>(new GUILabel("P -> Play Again"));
@@ -284,7 +287,7 @@ void Asteroids::CreateGUI()
 	// Add the GUILabel to the GUIContainer  
 	shared_ptr<GUIComponent> play_again_component
 		= static_pointer_cast<GUIComponent>(mPlayAgain);
-	mGameDisplay->GetContainer()->AddComponent(play_again_component, GLVector2f(0.5f, 0.3f));
+	mGameDisplay->GetContainer()->AddComponent(play_again_component, GLVector2f(0.5f, 0.1f));
 
 }
 void Asteroids::CreateStartScreenGUI() {
@@ -297,7 +300,7 @@ void Asteroids::CreateStartScreenGUI() {
 	mGameDisplay->GetContainer()->AddComponent(start_game_component, GLVector2f(0.18f, 0.6f));
 
 	// Create a new GUILabel and wrap it up in a shared_ptr
-	mExitGame = make_shared<GUILabel>("Press \"End KEY\" To Exit");
+	mExitGame = make_shared<GUILabel>("Press \"End Key\" To Exit");
 	// Set the vertical alignment of the label to GUI_VALIGN_BOTTOM
 	mExitGame->SetVerticalAlignment(GUIComponent::GUI_VALIGN_BOTTOM);
 	// Add the GUILabel to the GUIComponent  
@@ -321,12 +324,101 @@ void Asteroids::OnScoreChanged(int score)
 }
 
 //Writes the Current Score to the File to keep record of scores.
-void Asteroids::WriteScore()
-{
-	ofstream file("VC\Asteroids\Scores.txt", ios::out | ios::app);
-	file << mScoreKeeper.getmScore() << endl;
-	file.close();
+void Asteroids::WriteScore() {
+	int score = mScoreKeeper.getmScore();
+	cout << "WriteScore" << endl;
+	try {
+		fstream file("RecordScore.txt", ios_base::out | ios_base::app);
+
+		file << score << endl;
+		file.close();
+	}
+	catch (int e)
+	{
+		cout << "Error number " << e << endl;
+	}
 }
+
+//Reads the Top 5 Scores and Display Once the game ends;
+void Asteroids::ReadScore() {
+	vector<int> nums;
+
+	mHighScoreTable = shared_ptr<GUILabel>(new GUILabel("Top 5 Highest Scores"));
+	mHighScoreTable->SetHorizontalAlignment(GUIComponent::GUI_HALIGN_CENTER);
+	mHighScoreTable->SetVerticalAlignment(GUIComponent::GUI_VALIGN_MIDDLE);
+	shared_ptr<GUIComponent> high_score_table_component = static_pointer_cast<GUIComponent>(mHighScoreTable);
+	mGameDisplay->GetContainer()->AddComponent(high_score_table_component, GLVector2f(0.5f, 0.9f));
+
+
+	try {
+
+		fstream file;
+		file.open("RecoreScore.txt");
+		
+		int num;
+		while (file >> num) {
+			nums.push_back(num);
+		}
+		file.close();
+		sort(nums.begin(), nums.end());
+		
+	}
+	catch(int e){
+		cout << "File Not Open/Found: " << e << endl;
+	}
+
+   float yPos = 0.8f;
+	for (int i = 0; i < 5; ++i) {
+		mPrintScore = shared_ptr<GUILabel>(new GUILabel(to_string(nums[i])));
+		mPrintScore->SetHorizontalAlignment(GUIComponent::GUI_HALIGN_CENTER);
+		mPrintScore->SetVerticalAlignment(GUIComponent::GUI_VALIGN_MIDDLE);
+		shared_ptr<GUIComponent> print_score_component = dynamic_pointer_cast<GUIComponent>(mPrintScore);
+		mGameDisplay->GetContainer()->AddComponent(print_score_component, GLVector2f(0.5, yPos));
+		yPos = yPos - 0.1f;
+	}
+	
+	//CreateScoreGUI(listOfScore);
+}
+//vector<int> Asteroids::topFiveScore(string filename) {
+//	ifstream infile(filename);
+//	vector<int> nums;
+//	int num;
+//	while (infile >> num) {
+//		nums.push_back(num);
+//	}
+//	infile.close();
+//	sort(nums.rbegin(), nums.rend());
+//	vector<int> top_five(nums.begin(), nums.begin() + min(5, (int)nums.size()));
+//	return top_five;
+//}
+//
+////create gui for top 5 scores
+//void Asteroids::CreateScoreGUI(const vector<int> &scores) {
+//	float yPos = 0.8f;
+//	// Create a new GUILabel and wrap it up in a shared_ptr
+//	mHighScoreTable = shared_ptr<GUILabel>(new GUILabel("Top 5 Highest Scores"));
+//	// Set the horizontal alignment of the label to GUI_HALIGN_CENTER
+//	mHighScoreTable->SetHorizontalAlignment(GUIComponent::GUI_HALIGN_CENTER);
+//	// Set the vertical alignment of the label to GUI_VALIGN_MIDDLE
+//	mHighScoreTable->SetVerticalAlignment(GUIComponent::GUI_VALIGN_MIDDLE);
+//	// Add the GUILabel to the GUIContainer  
+//	shared_ptr<GUIComponent> high_score_table_component = static_pointer_cast<GUIComponent>(mHighScoreTable);
+//	mGameDisplay->GetContainer()->AddComponent(high_score_table_component, GLVector2f(0.5f, 0.9f));
+//
+//	
+//	for (int i = 0; i < 5; ++i) {
+//		mPrintScore = shared_ptr<GUILabel>(new GUILabel(to_string(scores[i])));
+//		mPrintScore->SetHorizontalAlignment(GUIComponent::GUI_HALIGN_CENTER);
+//		mPrintScore->SetVerticalAlignment(GUIComponent::GUI_VALIGN_MIDDLE);
+//		shared_ptr<GUIComponent> print_score_component = static_pointer_cast<GUIComponent>(mPrintScore);
+//		mGameDisplay->GetContainer()->AddComponent(print_score_component, GLVector2f(0.5, yPos));
+//		yPos = yPos - 0.1f;
+//	}
+//
+//	
+//
+//}
+//
 
 void Asteroids::OnPlayerKilled(int lives_left)
 {
