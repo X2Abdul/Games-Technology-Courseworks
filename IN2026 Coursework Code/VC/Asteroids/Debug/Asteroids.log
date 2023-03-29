@@ -1,6 +1,10 @@
 ﻿cl : command line  warning D9035: option 'Gm' has been deprecated and will be removed in a future release
   Asteroids.cpp
-C:\Users\don00\Desktop\Games-Technology-Courseworks\IN2026 Coursework Code\src\Asteroids.cpp(373,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\don00\Desktop\Games-Technology-Courseworks\IN2026 Coursework Code\src\Asteroids.cpp(547,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\don00\Desktop\Games-Technology-Courseworks\IN2026 Coursework Code\src\Asteroids.cpp(514,6): warning C4101: 'score': unreferenced local variable
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  main.cpp
 Asteroid.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
   Asteroids.vcxproj -> C:\Users\don00\Desktop\Games-Technology-Courseworks\IN2026 Coursework Code\bin\Asteroids.exe
   ..\..\assets\asteroid.shape

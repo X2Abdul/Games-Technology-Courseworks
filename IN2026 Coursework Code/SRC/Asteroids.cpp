@@ -93,8 +93,169 @@ void Asteroids::OnKeyPressed(uchar key, int x, int y)
 		mSpaceship->Shoot();
 		break;
 
-	case 'p':
+	//all the cases below will add whichever leter is pressed to a string to hold players name.
+	case 'a':
+		if (enterName) {
+			name += "a";
+		}
+		break;
+
+	case 'b':
+		if (enterName) {
+			name += "b";
+		}
+		break;
+
+	case 'c':
+		if (enterName) {
+			name += "c";
+		}
+		break;
+
+	case 'd':
+		if (enterName) {
+			name += "d";
+		}
+		break;
+
+	case 'e':
+		if (enterName) {
+			name += "e";
+		}
+		break;
+
+	case 'f':
+		if (enterName) {
+			name += "f";
+		}
+		break;
+
+	case 'g':
+		if (enterName) {
+			name += "g";
+		}
+		break;
+
+	case 'h':
+		if (enterName) {
+			name += "h";
+		}
+		break;
+
+	case 'i':
+		if (enterName) {
+			name += "i";
+		}
+		break;
+
+	case 'j':
+		if (enterName) {
+			name += "j";
+		}
+		break;
+
+	case 'k':
+		if (enterName) {
+			name += "k";
+		}
+		break;
+
+	case 'l':
+		if (enterName) {
+			name += "l";
+		}
+		break;
 		
+	case 'm':
+		if (enterName) {
+			name += "m";
+		}
+		break;
+
+	case 'n':
+		if (enterName) {
+			name += "n";
+		}
+		break;
+
+	case 'o':
+		if (enterName) {
+			name += "o";
+		}
+		break;
+
+	case 'p':
+		if (enterName) {
+			name += "p";
+		}
+		break;
+
+	case 'q':
+		if (enterName) {
+			name += "q";
+		}
+		break;
+
+	case 'r':
+		if (enterName) {
+			name += "r";
+		}
+		break;
+
+	case 's':
+		if (enterName) {
+			name += "s";
+		}
+		break;
+
+	case 't':
+		if (enterName) {
+			name += "t";
+		}
+		break;
+
+	case 'u':
+		if (enterName) {
+			name += "u";
+		}
+		break;
+
+	case 'v':
+		if (enterName) {
+			name += "v";
+		}
+		break;
+#
+	case 'w':
+		if (enterName) {
+			name += "w";
+		}
+		break;
+
+	case 'x':
+		if (enterName) {
+			name += "x";
+		}
+		break;
+
+	case 'y':
+		if (enterName) {
+			name += "y";
+		}
+		break;
+
+	case 'z':
+		if (enterName) {
+			name += "z";
+		}
+		break;
+
+
+	//stop player from typing their name
+	case '1':
+		enterName = false;
+		SetTimer(500, SHOW_HIGH_SCORE_TABLE);
+		break;
 	default:
 		break;
 	}
@@ -191,13 +352,20 @@ void Asteroids::OnTimer(int value)
 
 	if (value == SHOW_GAME_OVER)
 	{
-		WriteScore();
+		
 		spaceshipAlive = false;
 		mGameOverLabel->SetVisible(true);
-		mPlayAgain->SetVisible(true);
 		mScoreLabel->SetVisible(false);
 		mLivesLabel->SetVisible(false);
+		mEnterName->SetVisible(true);
+		enterName = true;
+		
+	}
+
+	if (value == SHOW_HIGH_SCORE_TABLE) {
+		WriteScore();
 		ReadScore();
+		mEnterName->SetVisible(false);
 	}
 
 }
@@ -254,7 +422,7 @@ void Asteroids::CreateGUI()
 	mGameDisplay->GetContainer()->AddComponent(score_component, GLVector2f(0.0f, 1.0f));
 
 	// Create a new GUILabel and wrap it up in a shared_ptr
-	mLivesLabel = make_shared<GUILabel>("Lives: 0");
+	mLivesLabel = make_shared<GUILabel>("Lives: 3");
 	// Set the vertical alignment of the label to GUI_VALIGN_BOTTOM
 	mLivesLabel->SetVerticalAlignment(GUIComponent::GUI_VALIGN_BOTTOM);
 	// Add the GUILabel to the GUIComponent  
@@ -274,20 +442,20 @@ void Asteroids::CreateGUI()
 		= static_pointer_cast<GUIComponent>(mGameOverLabel);
 	mGameDisplay->GetContainer()->AddComponent(game_over_component, GLVector2f(0.5f, 0.2f));
 
-	/*
+	
 	// Create a new GUILabel and wrap it up in a shared_ptr
-	mPlayAgain = shared_ptr<GUILabel>(new GUILabel("P -> Play Again"));
+	mEnterName = shared_ptr<GUILabel>(new GUILabel("Please Type Your Name - Press 1 When Done"));
 	// Set the horizontal alignment of the label to GUI_HALIGN_CENTER
-	mPlayAgain->SetHorizontalAlignment(GUIComponent::GUI_HALIGN_CENTER);
+	mEnterName->SetHorizontalAlignment(GUIComponent::GUI_HALIGN_CENTER);
 	// Set the vertical alignment of the label to GUI_VALIGN_MIDDLE
-	mPlayAgain->SetVerticalAlignment(GUIComponent::GUI_VALIGN_BOTTOM);
+	mEnterName->SetVerticalAlignment(GUIComponent::GUI_VALIGN_BOTTOM);
 	// Set the visibility of the label to false (hidden)
-	mPlayAgain->SetVisible(false);
+	mEnterName->SetVisible(false);
 	// Add the GUILabel to the GUIContainer  
 	shared_ptr<GUIComponent> play_again_component
-		= static_pointer_cast<GUIComponent>(mPlayAgain);
+		= static_pointer_cast<GUIComponent>(mEnterName);
 	mGameDisplay->GetContainer()->AddComponent(play_again_component, GLVector2f(0.5f, 0.1f));
-	*/
+	
 }
 void Asteroids::CreateStartScreenGUI() {
 	// Create a new GUILabel and wrap it up in a shared_ptr
@@ -329,7 +497,7 @@ void Asteroids::WriteScore() {
 	try {
 		fstream file("RecordScore.txt", ios_base::out | ios_base::app);
 
-		file << score << endl;
+		file << name << " " << score << endl;
 		file.close();
 	}
 	catch (int e)
@@ -338,10 +506,13 @@ void Asteroids::WriteScore() {
 	}
 }
 
+
 //Reads the Top 5 Scores and Display Once the game ends;
 void Asteroids::ReadScore() {
 	vector<int> nums;
-
+	
+	int score;
+	string pName;
 	mHighScoreTable = shared_ptr<GUILabel>(new GUILabel("Top 5 Highest Scores"));
 	mHighScoreTable->SetHorizontalAlignment(GUIComponent::GUI_HALIGN_CENTER);
 	mHighScoreTable->SetVerticalAlignment(GUIComponent::GUI_VALIGN_MIDDLE);
@@ -354,8 +525,9 @@ void Asteroids::ReadScore() {
 		file.open("RecordScore.txt");
 		
 		int num;
-		while (file >> num) {
+		while (file >> pName >> num) {
 			nums.push_back(num);
+			playerRecords[num] = pName;
 		}
 		file.close();
 		cout << "Success";
@@ -368,14 +540,24 @@ void Asteroids::ReadScore() {
 	sort(nums.begin(), nums.end(), std::greater<int>());
 	vector<int> top_five(nums.begin(), nums.begin() + min(5, (int)nums.size()));
 
-   float yPos = 0.8f;
+	//creates an iterator to find the matching name from the map with the score.
+	map<int, string>::iterator it;
+
+    float yPos = 0.8f;
 	for (int i = 0; i < top_five.size(); ++i) {
+
+		
 		
 		mPrintScore = shared_ptr<GUILabel>(new GUILabel(to_string(top_five[i])));
 		mPrintScore->SetHorizontalAlignment(GUIComponent::GUI_HALIGN_CENTER);
-		
-		shared_ptr<GUIComponent> print_score_component = dynamic_pointer_cast<GUIComponent>(mPrintScore);
-		mGameDisplay->GetContainer()->AddComponent(print_score_component, GLVector2f(0.5, yPos));
+		shared_ptr<GUIComponent> print_score_component = static_pointer_cast<GUIComponent>(mPrintScore);
+		mGameDisplay->GetContainer()->AddComponent(print_score_component, GLVector2f(0.7, yPos));
+
+		mPrintName = shared_ptr<GUILabel>(new GUILabel(playerRecords[top_five[i]]));
+		mPrintName->SetHorizontalAlignment(GUIComponent::GUI_HALIGN_CENTER);
+		shared_ptr<GUIComponent> print_name_component = static_pointer_cast<GUIComponent>(mPrintName);
+		mGameDisplay->GetContainer()->AddComponent(print_name_component, GLVector2f(0.3, yPos));
+
 		yPos = yPos - 0.1f;
 	}
 	

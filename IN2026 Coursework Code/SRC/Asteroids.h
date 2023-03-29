@@ -9,6 +9,7 @@
 #include "ScoreKeeper.h"
 #include "Player.h"
 #include "IPlayerListener.h"
+#include <map>
 
 class GameObject;
 class Spaceship;
@@ -61,11 +62,12 @@ private:
 	shared_ptr<GUILabel> mGameOverLabel;
 	shared_ptr<GUILabel> mStartGame;
 	shared_ptr<GUILabel> mExitGame;
-	shared_ptr<GUILabel> mPlayAgain;
+	shared_ptr<GUILabel> mEnterName;
 
 	//High Score Table Labels
 	shared_ptr<GUILabel> mHighScoreTable;
 	shared_ptr<GUILabel> mPrintScore;
+	shared_ptr<GUILabel> mPrintName;
 
 
 
@@ -77,6 +79,11 @@ private:
 
 	bool spaceshipAlive = false;
 
+	//if true will allow the player to enter name
+	bool enterName = false;
+	//holds players name
+	string name;
+
 	void ResetSpaceship();
 	shared_ptr<GameObject> CreateSpaceship();
 	void CreateGUI();
@@ -87,15 +94,20 @@ private:
 	
 	shared_ptr<GameObject> CreateExplosion();
 
-	//high score meathods
+	//keep the players name and their score
+	map<int,string > playerRecords;
+
+	//writes the players name and their score to the file
 	void WriteScore();
+	
+	//reads the players name and add it to the score.
 	void ReadScore();
-	/*void CreateScoreGUI(const vector<int> &scores);
-	vector<int> topFiveScore(string filename);*/
+	
 	
 	const static uint SHOW_GAME_OVER = 0;
 	const static uint START_NEXT_LEVEL = 1;
 	const static uint CREATE_NEW_PLAYER = 2;
+	const static uint SHOW_HIGH_SCORE_TABLE = 3;
 
 	ScoreKeeper mScoreKeeper;
 	Player mPlayer;
