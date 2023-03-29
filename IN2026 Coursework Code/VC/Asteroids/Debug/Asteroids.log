@@ -1,7 +1,6 @@
 ﻿cl : command line  warning D9035: option 'Gm' has been deprecated and will be removed in a future release
   Asteroids.cpp
-C:\Users\don00\Desktop\Games-Technology-Courseworks\IN2026 Coursework Code\src\Asteroids.cpp(547,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\don00\Desktop\Games-Technology-Courseworks\IN2026 Coursework Code\src\Asteroids.cpp(514,6): warning C4101: 'score': unreferenced local variable
+C:\Users\don00\Desktop\Games-Technology-Courseworks\IN2026 Coursework Code\src\Asteroids.cpp(561,20): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
   Skipping... (no relevant changes detected)
   main.cpp

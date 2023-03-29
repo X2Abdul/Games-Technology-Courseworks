@@ -6,3 +6,4 @@ kizito 10
 bigman 123
 rehman 140
 hello 200
+abdul 40

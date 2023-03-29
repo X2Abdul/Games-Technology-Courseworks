@@ -495,9 +495,11 @@ void Asteroids::WriteScore() {
 	int score = mScoreKeeper.getmScore();
 	cout << "WriteScore" << endl;
 	try {
+		//opens the file
 		fstream file("RecordScore.txt", ios_base::out | ios_base::app);
-
+		//write name score to the file
 		file << name << " " << score << endl;
+		//close the file
 		file.close();
 	}
 	catch (int e)
@@ -509,10 +511,13 @@ void Asteroids::WriteScore() {
 
 //Reads the Top 5 Scores and Display Once the game ends;
 void Asteroids::ReadScore() {
+	//create vector to store scores
 	vector<int> nums;
 	
-	int score;
+	//cretae string to stores name
 	string pName;
+
+	//displays High score Table Title
 	mHighScoreTable = shared_ptr<GUILabel>(new GUILabel("Top 5 Highest Scores"));
 	mHighScoreTable->SetHorizontalAlignment(GUIComponent::GUI_HALIGN_CENTER);
 	mHighScoreTable->SetVerticalAlignment(GUIComponent::GUI_VALIGN_MIDDLE);
@@ -525,39 +530,48 @@ void Asteroids::ReadScore() {
 		file.open("RecordScore.txt");
 		
 		int num;
+
+		//first word in pName and second in num
 		while (file >> pName >> num) {
+			//adds the score to the nums vector
 			nums.push_back(num);
+
+			//adds the name and the score
 			playerRecords[num] = pName;
 		}
+		//closes the file
 		file.close();
 		cout << "Success";
 		
 	}
+	//catches exception 
 	catch(int e){
-		cout << "File Not Open/Found: " << e << endl;
+		cout << "Error No.: " << e << endl;
 	}
 
+	//sorts the vector high to low score
 	sort(nums.begin(), nums.end(), std::greater<int>());
+
+	//adds top 5 scores from the nums
 	vector<int> top_five(nums.begin(), nums.begin() + min(5, (int)nums.size()));
 
-	//creates an iterator to find the matching name from the map with the score.
-	map<int, string>::iterator it;
-
+	//y position of the gui
     float yPos = 0.8f;
+	//displays top 5 score
 	for (int i = 0; i < top_five.size(); ++i) {
-
-		
-		
+		//displays score
 		mPrintScore = shared_ptr<GUILabel>(new GUILabel(to_string(top_five[i])));
 		mPrintScore->SetHorizontalAlignment(GUIComponent::GUI_HALIGN_CENTER);
 		shared_ptr<GUIComponent> print_score_component = static_pointer_cast<GUIComponent>(mPrintScore);
 		mGameDisplay->GetContainer()->AddComponent(print_score_component, GLVector2f(0.7, yPos));
 
+		//displays the player name by using map to find the name by score
 		mPrintName = shared_ptr<GUILabel>(new GUILabel(playerRecords[top_five[i]]));
 		mPrintName->SetHorizontalAlignment(GUIComponent::GUI_HALIGN_CENTER);
 		shared_ptr<GUIComponent> print_name_component = static_pointer_cast<GUIComponent>(mPrintName);
 		mGameDisplay->GetContainer()->AddComponent(print_name_component, GLVector2f(0.3, yPos));
 
+		//decreases the yPos by 0.1f
 		yPos = yPos - 0.1f;
 	}
 	
