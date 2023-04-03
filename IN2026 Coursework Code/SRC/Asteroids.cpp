@@ -96,157 +96,267 @@ void Asteroids::OnKeyPressed(uchar key, int x, int y)
 	//all the cases below will add whichever leter is pressed to a string to hold players name.
 	case 'a':
 		if (enterName) {
+			
 			name += "a";
+			if (count > 0) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
 	case 'b':
 		if (enterName) {
+			
 			name += "b";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
 	case 'c':
 		if (enterName) {
+			
 			name += "c";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
 	case 'd':
 		if (enterName) {
+			;
 			name += "d";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
 	case 'e':
 		if (enterName) {
+			
 			name += "e";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
 	case 'f':
 		if (enterName) {
+			
 			name += "f";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
 	case 'g':
 		if (enterName) {
 			name += "g";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
 	case 'h':
 		if (enterName) {
 			name += "h";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
 	case 'i':
 		if (enterName) {
 			name += "i";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
 	case 'j':
 		if (enterName) {
 			name += "j";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
 	case 'k':
 		if (enterName) {
 			name += "k";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
 	case 'l':
 		if (enterName) {
 			name += "l";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 		
 	case 'm':
 		if (enterName) {
 			name += "m";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
 	case 'n':
 		if (enterName) {
 			name += "n";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
 	case 'o':
 		if (enterName) {
 			name += "o";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
 	case 'p':
 		if (enterName) {
 			name += "p";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
 	case 'q':
 		if (enterName) {
 			name += "q";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
 	case 'r':
 		if (enterName) {
 			name += "r";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
 	case 's':
 		if (enterName) {
 			name += "s";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
 	case 't':
 		if (enterName) {
 			name += "t";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
 	case 'u':
 		if (enterName) {
 			name += "u";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
 	case 'v':
 		if (enterName) {
 			name += "v";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 #
 	case 'w':
 		if (enterName) {
 			name += "w";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
 	case 'x':
 		if (enterName) {
 			name += "x";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
 	case 'y':
 		if (enterName) {
 			name += "y";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
 	case 'z':
 		if (enterName) {
 			name += "z";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
 		}
 		break;
 
@@ -298,6 +408,8 @@ void Asteroids::OnSpecialKeyPressed(int key, int x, int y)
 	default: break;
 	}
 }
+
+
 
 void Asteroids::OnSpecialKeyReleased(int key, int x, int y)
 {
@@ -358,14 +470,16 @@ void Asteroids::OnTimer(int value)
 		mScoreLabel->SetVisible(false);
 		mLivesLabel->SetVisible(false);
 		mEnterName->SetVisible(true);
+		mName->SetVisible(true);
 		enterName = true;
 		
 	}
 
 	if (value == SHOW_HIGH_SCORE_TABLE) {
+		RemoveHighScoreIntrustionGUI();
 		WriteScore();
 		ReadScore();
-		mEnterName->SetVisible(false);
+		
 	}
 
 }
@@ -455,6 +569,19 @@ void Asteroids::CreateGUI()
 	shared_ptr<GUIComponent> play_again_component
 		= static_pointer_cast<GUIComponent>(mEnterName);
 	mGameDisplay->GetContainer()->AddComponent(play_again_component, GLVector2f(0.5f, 0.1f));
+
+	// Create a new GUILabel and wrap it up in a shared_ptr
+	mName = shared_ptr<GUILabel>(new GUILabel("Name: "));
+	// Set the horizontal alignment of the label to GUI_HALIGN_CENTER
+	mName->SetHorizontalAlignment(GUIComponent::GUI_HALIGN_CENTER);
+	// Set the vertical alignment of the label to GUI_VALIGN_MIDDLE
+	mName->SetVerticalAlignment(GUIComponent::GUI_VALIGN_BOTTOM);
+	// Set the visibility of the label to false (hidden)
+	mName->SetVisible(false);
+	// Add the GUILabel to the GUIContainer  
+	shared_ptr<GUIComponent> name_component
+		= static_pointer_cast<GUIComponent>(mName);
+	mGameDisplay->GetContainer()->AddComponent(name_component, GLVector2f(0.3f, 0.5f));
 	
 }
 void Asteroids::CreateStartScreenGUI() {
@@ -474,6 +601,26 @@ void Asteroids::CreateStartScreenGUI() {
 	shared_ptr<GUIComponent> exit_game_component = static_pointer_cast<GUIComponent>(mExitGame);
 	mGameDisplay->GetContainer()->AddComponent(exit_game_component, GLVector2f(0.25f, 0.2f));
 
+}
+
+void Asteroids::CreateNameGUI() {
+	// Create a new GUILabel and wrap it up in a shared_ptr
+	mTShowName = make_shared<GUILabel>(name);
+	// Set the vertical alignment of the label to GUI_VALIGN_BOTTOM
+	mTShowName->SetVerticalAlignment(GUIComponent::GUI_VALIGN_BOTTOM);
+
+	mTShowName->SetVisible(true);
+	// Add the GUILabel to the GUIComponent  
+	shared_ptr<GUIComponent> T_Show_Name_component = static_pointer_cast<GUIComponent>(mTShowName);
+	mGameDisplay->GetContainer()->AddComponent(T_Show_Name_component, GLVector2f(0.4f, 0.5f));
+	count == 1;
+}
+
+void Asteroids::RemoveHighScoreIntrustionGUI() {
+	mTShowName->SetVisible(false);
+	mEnterName->SetVisible(false);
+	mName->SetVisible(false);
+	
 }
 void Asteroids::RemoveStartScreenGUI() {
 	mStartGame->SetVisible(false);

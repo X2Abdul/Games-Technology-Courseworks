@@ -68,6 +68,8 @@ private:
 	shared_ptr<GUILabel> mHighScoreTable;
 	shared_ptr<GUILabel> mPrintScore;
 	shared_ptr<GUILabel> mPrintName;
+	shared_ptr<GUILabel> mTShowName;
+	shared_ptr<GUILabel> mName;
 
 
 
@@ -84,10 +86,15 @@ private:
 	//holds players name
 	string name;
 
+	//count typing letters
+	int count = 0;
+
 	void ResetSpaceship();
 	shared_ptr<GameObject> CreateSpaceship();
 	void CreateGUI();
 	void CreateStartScreenGUI();
+	void CreateNameGUI();
+	void RemoveHighScoreIntrustionGUI();
 	void RemoveStartScreenGUI();
 	void CreateAsteroids(const uint num_asteroids);
 

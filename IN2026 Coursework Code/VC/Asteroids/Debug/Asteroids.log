@@ -1,9 +1,7 @@
 ﻿cl : command line  warning D9035: option 'Gm' has been deprecated and will be removed in a future release
   Asteroids.cpp
-C:\Users\don00\Desktop\Games-Technology-Courseworks\IN2026 Coursework Code\src\Asteroids.cpp(561,20): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  main.cpp
+C:\Users\don00\Desktop\Games-Technology-Courseworks\IN2026 Coursework Code\src\Asteroids.cpp(558,8): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\don00\Desktop\Games-Technology-Courseworks\IN2026 Coursework Code\src\Asteroids.cpp(650,20): warning C4018: '<': signed/unsigned mismatch
 Asteroid.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
   Asteroids.vcxproj -> C:\Users\don00\Desktop\Games-Technology-Courseworks\IN2026 Coursework Code\bin\Asteroids.exe
   ..\..\assets\asteroid.shape

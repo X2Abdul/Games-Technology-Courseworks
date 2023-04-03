@@ -7,3 +7,13 @@ bigman 123
 rehman 140
 hello 200
 abdul 40
+abdulrehman 280
+abdulrehmanrehmanabdul 30
+            abdul rehman 580
+abdulrehman 70
+abdull 40
+abd 40
+abd 30
+ab 30
+ab 40
+abcd 30
