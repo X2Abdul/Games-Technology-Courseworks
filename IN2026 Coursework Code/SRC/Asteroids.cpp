@@ -734,7 +734,7 @@ void Asteroids::OnSpecialKeyReleased(int key, int x, int y)
 	case GLUT_KEY_DOWN:
 
 		if (gameStatus) {
-			mSpaceship->Thrust(-10);
+			mSpaceship->Thrust(0);
 		}
 
 		break;
@@ -762,6 +762,7 @@ void Asteroids::OnObjectRemoved(GameWorld* world, shared_ptr<GameObject> object)
 		}
 	}
 
+	//loads the demospaceship after its destroyed
 	if (object->GetType() == GameObjectType("DemoSpaceship")) {
 		SetTimer(500, RESET_DEMO_SPACESHIP);
 	}
@@ -811,7 +812,6 @@ void Asteroids::OnTimer(int value)
 		demospaceshipPos[2] = mDemoSpaceship->GetPosition().z;
 
 		GLfloat shootingDistance = 15.0f;
-		bool shouldShoot = false;
 
 		for (int i = 0; i < AsteroidPosTraker.size(); ++i) {
 			// Get the position of the current asteroid
@@ -827,18 +827,11 @@ void Asteroids::OnTimer(int value)
 			GLfloat distance = sqrt(dx * dx + dy * dy + dz * dz);
 
 			if (distance <= shootingDistance) {
-				shouldShoot = true;
-				
-				break; // No need to continue checking asteroids if one is within shooting distance
+				mDemoSpaceship->Shoot();
 			}
 		}
 
-		if (shouldShoot) {
-			mDemoSpaceship->Shoot();
-		}
-
 		SetTimer(800, START_DEMO_MODE);
-		
 	}
 
 	if (value == RESET_DEMO_SPACESHIP) {
@@ -899,6 +892,8 @@ shared_ptr<GameObject> Asteroids::CreateSpaceship()
 
 void Asteroids::CreateAsteroids(const uint num_asteroids)
 {
+	//clears the vector which holds the asteroids object pointer so the 
+	//old ones are replaced by the new ones everytime asteroids are created
 	AsteroidPosTraker.clear();
 	mAsteroidCount = num_asteroids;
 	for (uint i = 0; i < num_asteroids; i++)
@@ -911,8 +906,9 @@ void Asteroids::CreateAsteroids(const uint num_asteroids)
 		asteroid->SetBoundingShape(make_shared<BoundingSphere>(asteroid->GetThisPtr(), 10.0f));
 		asteroid->SetSprite(asteroid_sprite);
 		asteroid->SetScale(0.2f);
-		
 		mGameWorld->AddObject(asteroid);
+
+	// adds the pointer to the asterid object to the vector to get the object pos later
 		AsteroidPosTraker.push_back(asteroid);
 	}
 }
