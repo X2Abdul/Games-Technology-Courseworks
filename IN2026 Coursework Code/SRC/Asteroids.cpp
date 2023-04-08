@@ -384,6 +384,272 @@ void Asteroids::OnKeyPressed(uchar key, int x, int y)
 		}
 		break;
 
+	case 'A':
+		if (enterName) {
+			name += "A";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'B':
+		if (enterName) {
+
+			name += "B";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'C':
+		if (enterName) {
+
+			name += "C";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'D':
+		if (enterName) {
+
+			name += "D";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'E':
+		if (enterName) {
+
+			name += "E";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'F':
+		if (enterName) {
+
+			name += "F";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'G':
+		if (enterName) {
+			name += "G";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'H':
+		if (enterName) {
+			name += "H";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'I':
+		if (enterName) {
+			name += "I";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'J':
+		if (enterName) {
+			name += "J";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'K':
+		if (enterName) {
+			name += "K";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'L':
+		if (enterName) {
+			name += "L";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'M':
+		if (enterName) {
+			name += "M";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'N':
+		if (enterName) {
+			name += "N";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'O':
+		if (enterName) {
+			name += "O";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'P':
+		if (enterName) {
+			name += "P";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'Q':
+		if (enterName) {
+			name += "Q";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'R':
+		if (enterName) {
+			name += "R";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'S':
+		if (enterName) {
+			name += "S";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'T':
+		if (enterName) {
+			name += "T";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'U':
+		if (enterName) {
+			name += "U";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'V':
+		if (enterName) {
+			name += "V";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'W':
+		if (enterName) {
+			name += "W";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'X':
+		if (enterName) {
+			name += "X";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'Y':
+		if (enterName) {
+			name += "Y";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+	case 'Z':
+		if (enterName) {
+			name += "Z";
+			if (name.size() > 1) {
+				mTShowName->SetVisible(false);
+			}
+			CreateNameGUI();
+		}
+		break;
+
+
 
 	//stop player from typing their name
 	case '1':
