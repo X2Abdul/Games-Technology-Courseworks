@@ -10,6 +10,12 @@
 #include "Player.h"
 #include "IPlayerListener.h"
 #include <map>
+#include "Spaceship.h"
+#include "DemoSpaceship.h"
+#include <vector>
+#include <memory>
+
+
 
 class GameObject;
 class Spaceship;
@@ -54,9 +60,10 @@ public:
 	void setAsteroidCount(int s) {
 		asteroidCount = s;
 	}
-
+	
 private:
 	shared_ptr<Spaceship> mSpaceship;
+	shared_ptr<DemoSpaceship> mDemoSpaceship;
 	shared_ptr<GUILabel> mScoreLabel;
 	shared_ptr<GUILabel> mLivesLabel;
 	shared_ptr<GUILabel> mGameOverLabel;
@@ -71,18 +78,22 @@ private:
 	shared_ptr<GUILabel> mTShowName;
 	shared_ptr<GUILabel> mName;
 
-
-
+	vector<shared_ptr<GameObject>> AsteroidPosTraker;
 
 	uint mLevel;
 	uint mAsteroidCount;
 
 	int asteroidCount = 10;
 
-	bool spaceshipAlive = false;
+	bool gameStatus = false;
 
 	//if true will allow the player to enter name
 	bool enterName = false;
+
+	bool scoretable = true;
+
+	bool gamecheck = true;
+
 	//holds players name
 	string name;
 
@@ -91,12 +102,14 @@ private:
 
 	void ResetSpaceship();
 	shared_ptr<GameObject> CreateSpaceship();
+	shared_ptr<GameObject> CreateDemoSpaceship();
+	void CreateAsteroids(const uint num_asteroids);
 	void CreateGUI();
 	void CreateStartScreenGUI();
 	void CreateNameGUI();
 	void RemoveHighScoreIntrustionGUI();
 	void RemoveStartScreenGUI();
-	void CreateAsteroids(const uint num_asteroids);
+	//void CreateAsteroids(const uint num_asteroids);
 
 	
 	shared_ptr<GameObject> CreateExplosion();
@@ -116,6 +129,10 @@ private:
 	const static uint CREATE_NEW_PLAYER = 2;
 
 	const static uint SHOW_HIGH_SCORE_TABLE = 3;
+
+	const static uint START_DEMO_MODE = 4;
+
+	const static uint RESET_DEMO_SPACESHIP = 5;
 
 	ScoreKeeper mScoreKeeper;
 	Player mPlayer;
